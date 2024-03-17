@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.plot.ly/plotly-2.30.0.min.js" charset="utf-8"></script>
+    <script type="module" src="app.js"></script>
+</head>
+<body>
+
+    <div id="tester" style="width: 1250px;height:750px;"></div>
+
+    <script>
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    // Generate data for each month
+    var data = [];
+    var weekLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'];
+
+    for (var i = 0; i < weekLabels.length; i++) {
+        var trace = {
+            x: months.map(month => month),
+            y: [
+                20, 14, 25, 16, 17, 18, 22, 19, 15, 12, 16, 14, 17, // January sales for each week
+                19, 14, 22, 14, 16, 19, 15, 14, 10, 12, 12, 16, // February sales for each week
+                21, 15, 23, 17, 20, 22, 18, 16, 14, 18, 20, 22, // March sales for each week
+                18, 16, 22, 15, 17, 19, 16, 15, 13, 16, 15, 17  // April sales for each week
+                // Adjust the y-values accordingly for all months and weeks
+            ].slice(i * months.length, (i + 1) * months.length),
+            type: 'bar',
+            name: weekLabels[i],
+            marker: {
+                opacity: 0.7,
+            }
+        };
+        data.push(trace);
+    }
+
+    var layout = {
+        title: '2013 Sales Report',
+        xaxis: {
+            title: 'Months',
+            tickangle: -45
+        },
+        yaxis: {
+            title: 'Sales',
+            tickmode: 'linear', // Display scale as linear
+            tick0: 0, // Start from 0
+            dtick: 5 // Set the interval between ticks
+        },
+        barmode: 'group'
+    };
+
+
+
+    Plotly.newPlot('tester', data, layout);
+
+</script>
+</body>
+</html>
